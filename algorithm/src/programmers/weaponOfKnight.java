@@ -1,5 +1,4 @@
 package programmers;
-import java.util.Arrays;
 class Solution8 {
 	public int solution(int number, int limit, int power) {
         int answer = 0;
