@@ -14,6 +14,8 @@ class Solution11 {
         if(answer.isEmpty()) answer += "a";
         // 6단계 : 아이디가 15글자를 초과했다면 1~15째 글자만 남기고 지우기
         if(answer.length()>15) answer = answer.substring(0,15);
+        // 아이디의 처음 혹은 끝에 있는 마침표가 있다면 제거(한 번 더 시행)
+        answer = answer.replaceAll("^[.]|[.]$","");
         // 7단계 : 아이디 길이가 2자 이하인지 확인, 이하라면 현재 문자열 반복
         while(answer.length()<3) answer += answer.charAt(answer.length()-1);
         return answer;
@@ -23,5 +25,6 @@ class Solution11 {
 public class recommendId {
 	public static void main(String[] args) {
 		Solution11 sol = new Solution11();
+		System.out.println(sol.solution("...!@BaT#*..y.abcdefghijklm"));
 	}
 }
