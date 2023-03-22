@@ -1,28 +1,38 @@
 package programmers;
+import java.util.ArrayList;
 class Solution12 {
     public int[] solution(String today, String[] terms, String[] privacies) {
-        int[] answer = {};
+    	ArrayList<Integer> result = new ArrayList<Integer>();
+        
         for(int i=0;i<privacies.length;i++){
             int year = Integer.parseInt(privacies[i].substring(0,4));
             int month = Integer.parseInt(privacies[i].substring(5,7));
             int day = Integer.parseInt(privacies[i].substring(8,10));
             
-            for(int j=0,k=0;j<terms.length;j++){
-                String plevel = privacies[i].substring(11);
-                String tlevel = terms[j].substring(0,2);
-                if(plevel.equals(tlevel)){
+            for(int j=0;j<terms.length;j++){
+                char plevel = privacies[i].charAt(11);
+                char tlevel = terms[j].charAt(0);
+                if(plevel==tlevel){
                     month += Integer.parseInt(terms[j].substring(2));
-                    if(month<=12){
-                        if(year>Integer.parseInt(today.substring(0,4))) answer[k++] = i+1;
-                    }else{
+                    day -= 1;
+                    if(month>12){
                         year += 1;
                         month -= 12;
-                        if(year>Integer.parseInt(today.substring(0,4))) answer[k++] = i+1;
-                        if(year==Integer.parseInt(today.substring(0,4)) && month>Integer.parseInt(today.substring(5,7))) answer[k++] = i+1;
+                    }
+                    if(day==0) {
+                        month -= 1;
+                        day = 28;
+                    }
+                    if(year<Integer.parseInt(today.substring(0,4))) result.add(i+1);
+                    else if(year==Integer.parseInt(today.substring(0,4))){
+                        if(month<Integer.parseInt(today.substring(5,7))) result.add(i+1);
+                        else if(month==Integer.parseInt(today.substring(5,7)) && day<Integer.parseInt(today.substring(8))) result.add(i+1);
                     }
                 }
             }
         }
+        int[] answer = new int[result.size()];
+        for(int i=0;i<answer.length;i++) answer[i] = result.get(i);
         return answer;
     }
 }
