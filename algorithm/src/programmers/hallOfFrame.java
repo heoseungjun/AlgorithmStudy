@@ -8,7 +8,7 @@ class Solution19 {
         for(int i=0;i<score.length;i++){
             rank.add(score[i]);
             Collections.sort(rank);
-            if(k>=i) rank.remove(0);
+            if(i>=k) rank.remove(0);
             answer[i] = rank.get(0);
         }
         return answer;
