@@ -1,16 +1,23 @@
 package programmers;
 class Solution27 {
-    public int solution(int[] arr) {
-        int cnt = 0;
+	public int solution(int[] arr) {
         int answer = arr[arr.length-1];
-        for(int i=0,j=2;i<arr.length-1;i++){
-            if(answer % arr[i] != 0) cnt++;
-            if(cnt>0){
-                answer = arr[arr.length-1] * j++;
-                cnt = 0;i=0;
-            }
-        }
+        for(int i=0;i<arr.length-1;i++) answer = lcm(answer,arr[i]);
         return answer;
+    }
+    static int gcd(int x, int y){
+        while(y != 0){
+            int r = x % y;
+            x = y;
+            y = r;
+        }
+        return x;
+    }
+    static int lcm(int x, int y){
+        int r = 0;
+        r = x*y/gcd(x,y);
+        System.out.println(r);
+        return r;
     }
 }
 public class commonMultiple {
