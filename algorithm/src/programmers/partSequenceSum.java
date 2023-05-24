@@ -1,19 +1,17 @@
 package programmers;
 class Solution35 {
-    public int[] solution(int[] sequence, int k) {
+	public int[] solution(int[] sequence, int k) {
         int[] answer = new int[2];
-        int len = -1, sum = 0;
-        for(int i=0;i<sequence.length;i++){
-            sum += sequence[i];
-            len++;
+        int len = sequence.length;
+        for(int L=0, R=L; L<len; L++){
+            int sum = 0;
+            while(sum<=k && R<len) sum += sequence[R++];
+            System.out.println(sum);
             if(sum == k) {
-                answer[0] = i-len;
-                answer[1] = i;
+                answer[0] = L;
+                answer[1] = R;
             }
-            if(sum == k || sum > k){
-                i = i - len + 1;
-                sum = 0;len = -1;
-            }
+            //sum -= sequence[L];
         }
         return answer;
     }
