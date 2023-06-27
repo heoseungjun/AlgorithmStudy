@@ -1,16 +1,18 @@
 package programmers;
+import java.util.Stack;
 class Solution36 {
     public int[] solution(int[] numbers) {
-        int N = numbers.length;
-        int[] answer = new int[N];
-        answer[N-1] = -1;
-        for(int i=0;i<N-1;i++){
-            int j = N-1;
-            while(j>=i){
-                if(numbers[j]>numbers[i]) answer[i] = numbers[j];
-                j--;
+        int[] answer = new int[numbers.length];
+        Stack<Integer> stk = new Stack<>();
+        for(int i=numbers.length-1;i>=0;i--){
+            while(!stk.isEmpty()) {
+                if(stk.peek() > numbers[i]){
+                    answer[i] = stk.peek(); break;
+                }
+                else stk.pop();
             }
-            if(answer[i]==0) answer[i] = -1;
+            if(stk.isEmpty()) answer[i] = -1;
+            stk.push(numbers[i]);
         }
         return answer;
     }
@@ -20,6 +22,6 @@ public class backBigNum {
 		Solution36 sol = new Solution36();
 		int[] numbers = {2, 3, 3, 5};
 		System.out.println("µÞ Å« ¼ö : ");
-		for(int i=0;i<sol.solution(numbers).length;i++) System.out.println(numbers[i]);;
+		for(int i=0;i<numbers.length;i++) System.out.println(sol.solution(numbers)[i]);
 	}
 }
